@@ -25,7 +25,7 @@ const MainTitle = memo(() => (
       <span className="relative inline-block">
         <span className="absolute -inset-2 bg-gradient-to-r from-[#6366f1] to-[#a855f7] blur-2xl opacity-20"></span>
         <span className="relative bg-gradient-to-r from-white via-blue-100 to-purple-200 bg-clip-text text-transparent">
-          Full-Stack
+          Vibe Coding & AI Agents
         </span>
       </span>
       <br />
@@ -77,12 +77,12 @@ const SocialLink = memo(({ icon: Icon, link }) => (
 const TYPING_SPEED = 100;
 const ERASING_SPEED = 50;
 const PAUSE_DURATION = 2000;
-const WORDS = ["Technology Explorer", "Web Developer"];
-const TECH_STACK = ["React", "Javascript", "Node.js", "Tailwind"];
+const WORDS = ["Technology Explorer","Vibe Coder", "AI Agent Developer"];
+const TECH_STACK = ["React", "Generative AI", "Cybersecurity", "Agents", "SQL"];
 const SOCIAL_LINKS = [
-  { icon: Github, link: "https://github.com/Jaswanth-arjun" },
-  { icon: Linkedin, link: "https://www.linkedin.com/in/nelluru-jaswanth-a611ba2b3/" },
-  { icon: Instagram, link: "https://www.instagram.com/jaswanth_a_r_j_u_n/?igsh=eWs1YnM2YjVyd29m#" }
+  { icon: Github, link: "https://github.com/karnamvenkatachaitanya" },
+  { icon: Linkedin, link: "https://www.linkedin.com/in/venkata-chaitanya-karnam-5849322ba/" },
+  { icon: Instagram, link: "https://www.instagram.com/venkatachaitanyakarnam/?__pwa=1" }
 ];
 
 const Home = () => {

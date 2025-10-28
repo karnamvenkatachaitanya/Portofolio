@@ -205,7 +205,7 @@ const AboutPage = () => {
                 data-aos="fade-right"
                 data-aos-duration="1300"
               >
-                Nelluru Jaswanth
+                Karnam Venkata Chaitanya
               </span>
             </h2>
             
@@ -214,7 +214,7 @@ const AboutPage = () => {
               data-aos="fade-right"
               data-aos-duration="1500"
             >
-             Hi, I'm Jaswanth — a Computer Science graduate passionate about web development. I love creating engaging, user-friendly websites and always aim to deliver clean, effective solutions. 
+             Hi, I'm K.V.Chaitanya — a AI&DS Under graduate passionate about Vibe Coding & AI Agents development. I love creating engaging, user-friendly websites and always aim to deliver clean, effective solutions. 
             </p>
 
                {/* Quote Section */}
@@ -240,7 +240,7 @@ const AboutPage = () => {
       </div>
 
             <div className="flex flex-col lg:flex-row items-center lg:items-start gap-4 lg:gap-4 lg:px-0 w-full">
-              <a href="https://drive.google.com/file/d/1RgHrID7XP2XCvTBXuYCji7YI4lj8OLUr/view?usp=drive_link" className="w-full lg:w-auto">
+              <a href="https://drive.google.com/file/d/1q3SB6O5TJM3v_oCitKX4T7EdE8MjCsBA/view?usp=drive_link" className="w-full lg:w-auto">
               <button 
                 data-aos="fade-up"
                 data-aos-duration="800"
