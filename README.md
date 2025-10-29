@@ -36,7 +36,7 @@ Follow these steps to run the project locally:
 
 ```bash
 git clone[https://github.com/karnamvenkatachaitanya/Portofolio.git]
-cd Portofolio_V5
+cd Portofolio
 ```
 
 ### 2\. Install Dependencies
