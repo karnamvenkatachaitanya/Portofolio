@@ -1,12 +1,12 @@
-# Portfolio V5
+# Portfolio
 
 Hello everyone\! 👋
 
-Let me introduce myself, I'm **Nelluru Jaswanth**. On this occasion, I'd like to share the portfolio website project that I've developed.
+Let me introduce myself, I'm **Karnam Venkata Chaitanya**. On this occasion, I'd like to share the portfolio website project that I've developed.
 
 ## 🚀 Live Demo
 
-**Website Link:** [https://portofolio-v5-git-main-jaswanth-arjuns-projects.vercel.app/]
+**Website Link:** [https://portofolio-theta-cyan.vercel.app/]
 
 ## 🛠️ Tech Stack
 
@@ -35,7 +35,7 @@ Follow these steps to run the project locally:
 ### 1\. Clone the Repository
 
 ```bash
-git clone https://github.com/Jaswanth-arjun/Portofolio_V5.git
+git clone[https://github.com/karnamvenkatachaitanya/Portofolio.git]
 cd Portofolio_V5
 ```
 
@@ -177,7 +177,7 @@ VALUES ('REPLACE_WITH_YOUR_CERTIFICATE_IMAGE_URL.png');
 
 -- Insert one example comment
 INSERT INTO public.portfolio_comments (content, user_name) 
-VALUES ('Created By Nelluru Jaswanth', 'Jaswanth');
+VALUES ('Created By Karnam venkata chaitanya', 'chaitanya');
 
 ```
 
@@ -238,10 +238,10 @@ We would appreciate it if you decide to use this project. Please include proper 
 
 If you have any questions or need help with the setup, feel free to reach out\!
 
-**Nelluru Jaswanth**
+**KARNAM VENKATA CHAITANYA**
 
-  - Website: [https://www.eki.my.id/](https://www.eki.my.id/)
-  - GitHub: [Jaswanth](https://github.com/Jaswanth-arjun)
+  - Website: [https://portofolio-theta-cyan.vercel.app/]
+  - GitHub: [venkatachaitanyakarnam](https://github.com/karnamvenkatachaitanya)
 
 -----
 
