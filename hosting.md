@@ -99,7 +99,7 @@ If you prefer deploying on an OS-level Linux virtual server:
 ### Step 4: Configure Daemon Run with PM2
 To keep the Next.js process running in the background after you close SSH:
 ```bash
-pm2 start npm --name "portfolio" -- start -- -p 3000
+pm2 start node_modules/next/dist/bin/next --name "portfolio" -- start
 pm2 startup
 # (Run the systemd command outputted by pm2 startup to configure auto-start on reboot)
 pm2 save
