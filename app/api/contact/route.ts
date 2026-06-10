@@ -1,10 +1,12 @@
-
 interface ContactPayload {
   name: string;
   email: string;
   subject: string;
   message: string;
 }
+
+// Web3Forms access key (public, safe to hardcode — like a site key)
+const WEB3FORMS_KEY = "46178669-cfe4-4a03-8c6d-505555dd9f4d";
 
 export async function POST(request: Request) {
   try {
@@ -18,16 +20,6 @@ export async function POST(request: Request) {
       );
     }
 
-    const web3formsKey = process.env.WEB3FORMS_ACCESS_KEY;
-
-    if (!web3formsKey) {
-      console.error("WEB3FORMS_ACCESS_KEY is not set in environment variables");
-      return Response.json(
-        { error: "Contact form is not configured. Please contact the site owner directly." },
-        { status: 500 }
-      );
-    }
-
     const response = await fetch("https://api.web3forms.com/submit", {
       method: "POST",
       headers: {
@@ -35,7 +27,7 @@ export async function POST(request: Request) {
         Accept: "application/json",
       },
       body: JSON.stringify({
-        access_key: web3formsKey,
+        access_key: WEB3FORMS_KEY,
         name,
         email,
         subject: `[Portfolio] ${subject} — from ${name}`,
@@ -49,7 +41,10 @@ export async function POST(request: Request) {
 
     if (!response.ok || !result.success) {
       console.error("Web3Forms error:", result);
-      throw new Error(result.message ?? "Form submission failed");
+      return Response.json(
+        { error: result.message ?? "Failed to send message. Please try again later." },
+        { status: 500 }
+      );
     }
 
     return Response.json({ success: true });
