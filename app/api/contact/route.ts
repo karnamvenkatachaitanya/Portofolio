@@ -1,4 +1,3 @@
-import { SITE_CONFIG } from "@/lib/constants";
 
 interface ContactPayload {
   name: string;
