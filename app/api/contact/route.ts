@@ -1,4 +1,3 @@
-import { Resend } from "resend";
 import { SITE_CONFIG } from "@/lib/constants";
 
 interface ContactPayload {
@@ -20,41 +19,38 @@ export async function POST(request: Request) {
       );
     }
 
-    const contactEmail =
-      process.env.CONTACT_EMAIL ?? SITE_CONFIG.email;
-    const resendKey = process.env.RESEND_API_KEY;
+    const web3formsKey = process.env.WEB3FORMS_ACCESS_KEY;
 
-    if (resendKey) {
-      const resend = new Resend(resendKey);
-      await resend.emails.send({
-        from: "Portfolio Contact <onboarding@resend.dev>",
-        to: contactEmail,
-        replyTo: email,
-        subject: `[Portfolio] ${subject} — from ${name}`,
-        text: `Name: ${name}\nEmail: ${email}\nSubject: ${subject}\n\n${message}`,
-      });
-
-      return Response.json({ success: true });
+    if (!web3formsKey) {
+      console.error("WEB3FORMS_ACCESS_KEY is not set in environment variables");
+      return Response.json(
+        { error: "Contact form is not configured. Please contact the site owner directly." },
+        { status: 500 }
+      );
     }
 
-    // Fallback: FormSubmit.co (no backend API key needed)
-    const formSubmitRes = await fetch("https://formsubmit.co/ajax/" + contactEmail, {
+    const response = await fetch("https://api.web3forms.com/submit", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
         Accept: "application/json",
       },
       body: JSON.stringify({
+        access_key: web3formsKey,
         name,
         email,
-        subject,
+        subject: `[Portfolio] ${subject} — from ${name}`,
         message,
-        _subject: `[Portfolio] ${subject} — from ${name}`,
+        from_name: "Portfolio Contact Form",
+        replyto: email,
       }),
     });
 
-    if (!formSubmitRes.ok) {
-      throw new Error("Form submission failed");
+    const result = await response.json();
+
+    if (!response.ok || !result.success) {
+      console.error("Web3Forms error:", result);
+      throw new Error(result.message ?? "Form submission failed");
     }
 
     return Response.json({ success: true });
