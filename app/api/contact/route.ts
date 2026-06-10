@@ -1,12 +1,11 @@
+import nodemailer from "nodemailer";
+
 interface ContactPayload {
   name: string;
   email: string;
   subject: string;
   message: string;
 }
-
-// Web3Forms access key (public, safe to hardcode — like a site key)
-const WEB3FORMS_KEY = "46178669-cfe4-4a03-8c6d-505555dd9f4d";
 
 export async function POST(request: Request) {
   try {
@@ -20,32 +19,41 @@ export async function POST(request: Request) {
       );
     }
 
-    const response = await fetch("https://api.web3forms.com/submit", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-      },
-      body: JSON.stringify({
-        access_key: WEB3FORMS_KEY,
-        name,
-        email,
-        subject: `[Portfolio] ${subject} — from ${name}`,
-        message,
-        from_name: "Portfolio Contact Form",
-        replyto: email,
-      }),
-    });
+    const gmailUser = process.env.GMAIL_USER;
+    const gmailAppPassword = process.env.GMAIL_APP_PASSWORD;
+    const contactEmail = process.env.CONTACT_EMAIL ?? gmailUser;
 
-    const result = await response.json();
-
-    if (!response.ok || !result.success) {
-      console.error("Web3Forms error:", result);
+    if (!gmailUser || !gmailAppPassword) {
+      console.error("GMAIL_USER or GMAIL_APP_PASSWORD not set");
       return Response.json(
-        { error: result.message ?? "Failed to send message. Please try again later." },
+        { error: "Contact form is not configured." },
         { status: 500 }
       );
     }
+
+    const transporter = nodemailer.createTransport({
+      service: "gmail",
+      auth: {
+        user: gmailUser,
+        pass: gmailAppPassword,
+      },
+    });
+
+    await transporter.sendMail({
+      from: `"Portfolio Contact" <${gmailUser}>`,
+      to: contactEmail,
+      replyTo: email,
+      subject: `[Portfolio] ${subject} — from ${name}`,
+      text: `Name: ${name}\nEmail: ${email}\nSubject: ${subject}\n\n${message}`,
+      html: `
+        <h3>New Contact Form Submission</h3>
+        <p><strong>Name:</strong> ${name}</p>
+        <p><strong>Email:</strong> ${email}</p>
+        <p><strong>Subject:</strong> ${subject}</p>
+        <hr />
+        <p>${message.replace(/\n/g, "<br />")}</p>
+      `,
+    });
 
     return Response.json({ success: true });
   } catch (error) {
