@@ -129,8 +129,85 @@ pm2 save
    ```bash
    sudo systemctl restart nginx
    ```
-3. Secure your custom domain with free SSL using Certbot:
+ 3. Secure your custom domain:
+    - **Method A: Certbot (Let's Encrypt)**:
+      ```bash
+      sudo apt-get install -y certbot python3-certbot-nginx
+      sudo certbot --nginx -d yourdomain.com -d www.yourdomain.com
+      ```
+    - **Method B: Cloudflare Origin Certificate**:
+      Save the Origin Certificate and Private Key on the server, configure Nginx to read them, and enable **Full (strict)** encryption mode in Cloudflare. See details below.
+
+---
+
+## ☁️ Option C: Cloudflare Origin SSL Certificate Setup (Nginx)
+
+If you are using Cloudflare proxying and want to use Cloudflare's **Origin Certificate** for end-to-end encryption:
+
+### Step 1: Create SSL Certificate Files
+1. Create the certificate file:
    ```bash
-   sudo apt-get install -y certbot python3-certbot-nginx
-   sudo certbot --nginx -d yourdomain.com -d www.yourdomain.com
+   sudo nano /etc/ssl/certs/cloudflare.crt
    ```
+   *Paste the `-----BEGIN CERTIFICATE-----` contents inside, save, and exit.*
+2. Create the private key file:
+   ```bash
+   sudo nano /etc/ssl/private/cloudflare.key
+   ```
+   *Paste the `-----BEGIN PRIVATE KEY-----` contents inside, save, and exit.*
+3. Secure the key permissions:
+   ```bash
+   sudo chmod 600 /etc/ssl/private/cloudflare.key
+   ```
+
+### Step 2: Configure Nginx Server Blocks
+Open the default Nginx configuration:
+```bash
+sudo nano /etc/nginx/sites-available/default
+```
+Replace the file contents with:
+```nginx
+# Redirect HTTP (Port 80) to HTTPS
+server {
+    listen 80 default_server;
+    listen [::]:80 default_server;
+    server_name chaitanya.qzz.io www.chaitanya.qzz.io;
+    return 301 https://$host$request_uri;
+}
+
+# HTTPS Server block
+server {
+    listen 443 ssl default_server;
+    listen [::]:443 ssl default_server;
+
+    server_name chaitanya.qzz.io www.chaitanya.qzz.io;
+
+    # SSL Certificates
+    ssl_certificate /etc/ssl/certs/cloudflare.crt;
+    ssl_certificate_key /etc/ssl/private/cloudflare.key;
+
+    # Optimal SSL Settings
+    ssl_protocols TLSv1.2 TLSv1.3;
+    ssl_prefer_server_ciphers on;
+
+    location / {
+        proxy_pass http://localhost:3000;
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection 'upgrade';
+        proxy_set_header Host $host;
+        proxy_cache_bypass $http_upgrade;
+    }
+}
+```
+
+Verify and restart Nginx:
+```bash
+sudo nginx -t
+sudo systemctl restart nginx
+```
+
+### Step 3: Enable Strict Mode in Cloudflare
+1. Log into your **Cloudflare Dashboard**.
+2. Go to **SSL/TLS** > **Overview**.
+3. Set your SSL/TLS encryption mode to **Full (strict)**.
