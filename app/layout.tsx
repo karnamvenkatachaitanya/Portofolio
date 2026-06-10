@@ -11,6 +11,10 @@ export const metadata: Metadata = {
   description:
     "Portfolio of Karnam Venkata Chaitanya — AI Engineer, Product Builder, and Full-Stack Developer. Building production-grade AI systems that work in the real world.",
   metadataBase: new URL(SITE_CONFIG.domain),
+  icons: {
+    icon: "/images/avatar.jpg",
+    apple: "/images/avatar.jpg",
+  },
   openGraph: {
     title: `${SITE_CONFIG.name} — Portfolio`,
     description: SITE_CONFIG.tagline,
