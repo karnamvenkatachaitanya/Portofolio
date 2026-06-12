@@ -102,6 +102,7 @@ export function Hero() {
             </motion.p>
 
             <h1 className="mt-2 font-display text-[1.65rem] font-bold leading-[1.1] tracking-[-0.03em] text-text-primary min-[400px]:text-[1.85rem] sm:text-4xl md:text-[2.5rem] lg:mt-3 lg:text-[2.75rem] xl:text-5xl 2xl:text-[4.5rem] 3xl:text-[5.5rem]">
+              <span className="sr-only">Karnam Venkata Chaitanya — </span>
               {taglineWords.map((word, i) => (
                 <motion.span
                   key={`${word}-${i}`}
@@ -209,10 +210,10 @@ export function Hero() {
               <div className="relative h-36 w-36 overflow-hidden rounded-full border-[3px] border-bg-primary bg-bg-secondary shadow-lg sm:h-44 sm:w-44 md:h-52 md:w-52 lg:h-56 lg:w-56 xl:h-60 xl:w-60 2xl:h-80 2xl:w-80 3xl:h-[26rem] 3xl:w-[26rem]">
                 <Image
                   src={SITE_CONFIG.avatarUrl}
-                  alt={`${SITE_CONFIG.name} profile photo`}
+                  alt="Karnam Venkata Chaitanya — AI Engineer and Full-Stack Developer, NBKRIST Andhra Pradesh"
                   fill
                   className="object-cover object-[center_12%]"
-                  priority
+                  priority={true}
                   sizes="(max-width: 640px) 144px, (max-width: 768px) 176px, (max-width: 1280px) 224px, 384px"
                 />
               </div>
