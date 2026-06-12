@@ -33,7 +33,7 @@ export const metadata: Metadata = {
   publisher: "Karnam Venkata Chaitanya",
   alternates: { canonical: "https://chaitanya.qzz.io" },
   verification: {
-    google: "rhHPf6zBEwImKJDrzzPSlANMps4CxMmzPbDgegEz_MA",
+    google: "7kkWug-k3WK8vtNLmxyjWP_TzHYS_wxosjl_SK8-FvQ",
   },
   robots: {
     index: true,
