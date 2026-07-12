@@ -1,5 +1,6 @@
 name: Deploy Portfolio to AWS EC2
 
+# Trigger deployment run - secret configured
 on:
   push:
     branches:
