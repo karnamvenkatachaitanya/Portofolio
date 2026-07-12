@@ -1,6 +1,5 @@
 name: Deploy Portfolio to AWS EC2
 
-# Trigger deployment run
 on:
   push:
     branches:
@@ -12,12 +11,19 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      # Step 1: Decode the base64 SSH key into a secure file on the runner
+      - name: Decode SSH Deploy Key
+        run: |
+          echo "${{ secrets.EC2_SSH_KEY_B64 }}" | base64 --decode > /tmp/ssh_key
+          chmod 600 /tmp/ssh_key
+
+      # Step 2: Use the decoded key path to run the deployment script
       - name: Deploy via SSH connection
         uses: appleboy/ssh-action@v1.0.3
         with:
           host: ${{ secrets.EC2_HOST }}
           username: ${{ secrets.EC2_USERNAME }}
-          key: ${{ secrets.EC2_SSH_KEY }}
+          key_path: /tmp/ssh_key
           port: 22
           script: |
             # Load Node environment paths
