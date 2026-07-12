@@ -8,12 +8,12 @@ const buttonVariants = cva(
     variants: {
       variant: {
         default:
-          "bg-accent text-bg-primary hover:bg-accent/90 dark:bg-accent-pop dark:text-accent",
+          "bg-accent text-bg-primary hover:bg-accent/90 dark:bg-accent-pop dark:text-bg-dark",
         outline:
           "border border-border bg-transparent hover:bg-bg-secondary dark:border-border-dark",
         ghost: "hover:bg-bg-secondary",
         accent:
-          "bg-accent-pop text-accent hover:bg-accent-pop/90 font-semibold",
+          "bg-accent-pop text-bg-dark hover:bg-accent-pop/90 font-semibold",
       },
       size: {
         default: "h-10 px-5 py-2 2xl:h-12 2xl:px-6 2xl:text-base 3xl:h-13 3xl:px-7 3xl:text-lg",

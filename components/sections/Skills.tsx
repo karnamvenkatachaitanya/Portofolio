@@ -35,7 +35,7 @@ export function Skills() {
                 className={cn(
                   "rounded-full border px-4 py-2 text-sm 2xl:text-base 3xl:text-lg font-medium transition-all",
                   activeId === cat.id
-                    ? "border-accent bg-accent text-bg-primary dark:bg-accent-pop dark:text-accent"
+                    ? "border-accent bg-accent text-bg-primary dark:bg-accent-pop dark:text-bg-dark"
                     : "border-border text-text-secondary hover:border-accent hover:text-text-primary dark:border-border-dark"
                 )}
               >

@@ -6,7 +6,7 @@ import { SectionHeading } from "@/components/ui/SectionHeading";
 const stats = [
   { value: "9", label: "Projects" },
   { value: "5", label: "Internships/Roles" },
-  { value: "12+", label: "Awards & Certs" },
+  { value: "15+", label: "Awards & Certs" },
   { value: "Top 2.8%", label: "Nationwide" },
 ];
 

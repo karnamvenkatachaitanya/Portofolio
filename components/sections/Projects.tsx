@@ -42,7 +42,7 @@ export function Projects() {
                 className={cn(
                   "rounded-full border px-4 py-2 text-sm font-medium transition-all",
                   filter === f
-                    ? "border-accent bg-accent text-bg-primary dark:bg-accent-pop dark:text-accent"
+                    ? "border-accent bg-accent text-bg-primary dark:bg-accent-pop dark:text-bg-dark"
                     : "border-border text-text-secondary hover:border-accent dark:border-border-dark"
                 )}
               >
