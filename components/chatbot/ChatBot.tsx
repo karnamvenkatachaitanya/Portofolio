@@ -7,9 +7,7 @@ import {
   X,
   Bot,
   Trash2,
-  Zap,
   ShieldCheck,
-  Terminal,
   Activity,
 } from "lucide-react";
 import { ChatMessage } from "./ChatMessage";
@@ -182,8 +180,9 @@ export function ChatBot() {
 
       const duration = ((Date.now() - startTime) / 1000).toFixed(2);
       addLog("api", `Stream finished successfully. Duration: ${duration}s.`);
-    } catch (err: any) {
-      addLog("error", `Exception caught: ${err.message || err}`);
+    } catch (err) {
+      const errMsg = err instanceof Error ? err.message : String(err);
+      addLog("error", `Exception caught: ${errMsg}`);
       setMessages((prev) => [
         ...prev,
         {
